@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Future Web - Cute Edition 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffc0cb, #ff69b4, #ffb6c1);
+      font-family: 'Share Tech Mono', monospace;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      gap: 20px;
+      position: relative;
+    }
+
+    h1, .option {
+      font-size: 40px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      text-shadow: 0 0 10px #fff;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+
+    h1:hover, .option:hover {
+      transform: scale(1.1);
+      background: white;
+      color: #ff69b4;
+      box-shadow: 0 0 15px #fff, 0 0 25px #ff69b4;
+    }
+
+    h1:active, .option:active {
+      transform: scale(0.95);
+    }
+
+    .options-container {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Instagram badge */
+    .instagram-badge {
+      position: fixed;
+      bottom: 15px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s ease;
+      z-index: 999;
+    }
+
+    .instagram-badge:hover {
+      background: white;
+      color: #ff69b4;
+    }
+
+    .instagram-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+      transition: fill 0.3s;
+    }
+
+    .instagram-badge:hover svg {
+      fill: #ff69b4;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="text" tabindex="0">My Future Web</h1>
+
+  <div class="options-container" id="options">
+    <div class="option" id="developer">Developer</div>
+    <div class="option" id="exit">Exit</div>
+  </div>
+
+  <!-- Instagram badge (hidden initially) -->
+  <a id="instaBadge" class="instagram-badge" href="https://www.instagram.com/skibidi_aariz/" target="_blank" style="display: none;">
+    <!-- Instagram SVG icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.21-30.21C293.63,120,224,120,224,120s-69.63,0-94.5,11.46a54,54,0,0,0-30.21,30.21C88,166.63,88,224,88,224s0,57.37,11.46,82.24a54,54,0,0,0,30.21,30.21C154.37,360,224,360,224,360s69.63,0,94.5-11.46a54,54,0,0,0,30.21-30.21C360,281.37,360,224,360,224S360,166.63,348.71,161.66ZM224,338.66c-63.34,0-114.66-51.32-114.66-114.66S160.66,109.34,224,109.34,338.66,160.66,338.66,224,287.34,338.66,224,338.66Zm117.71-186a26.14,26.14,0,1,1-26.14-26.14A26.14,26.14,0,0,1,341.71,152.66ZM398.8,80A48,48,0,0,1,448,129.2V382.8A48,48,0,0,1,398.8,432H49.2A48,48,0,0,1,0,382.8V129.2A48,48,0,0,1,49.2,80H398.8m0-48H49.2A96,96,0,0,0-48,129.2V382.8A96,96,0,0,0,49.2,480H398.8A96,96,0,0,0,496,382.8V129.2A96,96,0,0,0,398.8,32Z"/>
+    </svg>
+    @skibidi_aariz
+  </a>
+
+  <script>
+    const textEl = document.getElementById('text');
+    const options = document.getElementById('options');
+    const developer = document.getElementById('developer');
+    const exitBtn = document.getElementById('exit');
+    const instaBadge = document.getElementById('instaBadge');
+
+    // Typing effect
+    function typeEffect(element, text, speed = 100) {
+      let i = 0;
+      element.innerHTML = '';
+      const interval = setInterval(() => {
+        element.innerHTML += text[i];
+        i++;
+        if (i === text.length) clearInterval(interval);
+      }, speed);
+    }
+
+    // Initial typing
+    typeEffect(textEl, "My Future Web", 100);
+
+    // Show options on click
+    textEl.addEventListener('click', () => {
+      textEl.style.display = 'none';
+      options.style.display = 'flex';
+      options.classList.remove('fade-in');
+      void options.offsetWidth;
+      options.classList.add('fade-in');
+    });
+
+    // Developer button
+    developer.addEventListener('click', () => {
+      options.style.display = 'none';
+      textEl.innerText = "Developer: Aariz";
+      textEl.style.display = 'block';
+      instaBadge.style.display = 'flex'; // Show Instagram badge
+    });
+
+    // Exit button → reload to go back to homepage
+    exitBtn.addEventListener('click', () => {
+      location.reload(); // Or use: window.location.href = '/';
+    });
+
+    // Accessibility: Enter key acts like click
+    textEl.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') textEl.click();
+    });
+  </script>
+</body>
+</html>
+
+
